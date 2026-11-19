@@ -1,0 +1,77 @@
+{
+  "eads_version": "0.1.0",
+  "project": {
+    "name": "[PROJECT_NAME]",
+    "tier": "unclassified",
+    "lifecycle_stage": "discovery"
+  },
+  "gates": {
+    "G0": {
+      "name": "Project intake",
+      "status": "pending",
+      "approved_by": "",
+      "approved_at": "",
+      "scope": "",
+      "evidence": [],
+      "notes": ""
+    },
+    "G1": {
+      "name": "Requirements baseline",
+      "status": "pending",
+      "approved_by": "",
+      "approved_at": "",
+      "scope": "",
+      "evidence": [],
+      "notes": ""
+    },
+    "G2": {
+      "name": "Architecture baseline",
+      "status": "pending",
+      "approved_by": "",
+      "approved_at": "",
+      "scope": "",
+      "evidence": [],
+      "notes": ""
+    },
+    "G3": {
+      "name": "Delivery plan",
+      "status": "pending",
+      "approved_by": "",
+      "approved_at": "",
+      "scope": "",
+      "evidence": [],
+      "notes": ""
+    },
+    "G4": {
+      "name": "Implementation authorization",
+      "status": "pending",
+      "approved_by": "",
+      "approved_at": "",
+      "scope": "",
+      "evidence": [],
+      "notes": ""
+    },
+    "G5": {
+      "name": "Release authorization",
+      "status": "pending",
+      "approved_by": "",
+      "approved_at": "",
+      "scope": "",
+      "evidence": [],
+      "notes": ""
+    }
+  },
+  "policy": {
+    "implementation_requires": [
+      "G0",
+      "G1",
+      "G2",
+      "G3",
+      "G4"
+    ],
+    "release_requires": [
+      "G5"
+    ],
+    "agent_may_approve": false
+  }
+}
