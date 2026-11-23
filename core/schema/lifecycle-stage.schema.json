@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eads.local/schema/lifecycle-stage.schema.json",
+  "title": "EADS lifecycle stages",
+  "type": "object",
+  "properties": {
+    "stages": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/LifecycleStage" }
+    }
+  },
+  "required": ["stages"],
+  "additionalProperties": false,
+  "$defs": {
+    "LifecycleStage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^STAGE-\\d$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exit_criteria": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gate_ref": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "description", "artifact_refs", "exit_criteria"],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+schema_version: "1.0.0"
+policy_version: "0.2.0"
+lifecycle_state: draft
+released_at: "2026-11-23"
+files:
+  - governance.yaml
+  - capabilities.yaml
+  - evaluation.yaml
+compatible_schema_versions: []
+notes: >
+  Workstream A slice only. lifecycle.yaml, gates.yaml, artifacts.yaml, and
+  change-classification.yaml are not yet authored (Workstream B, pending
+  Section 14 items 1, 2, 4, 6, 7, 11 of the approved Phase 1 design) and are
+  intentionally absent from the files list above. The authority-domain enum
+  and lifecycle-stage ID values are likewise unresolved. This manifest must
+  not advance past lifecycle_state: draft until Workstream C integrates the
+  full bundle.
