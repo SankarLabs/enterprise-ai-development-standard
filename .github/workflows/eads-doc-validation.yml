@@ -14,4 +14,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Validate EADS document structure
-        run: python scripts/validate_eads.py --check-structure
+        run: python scripts/validate_eads.py --check-structure --root project-starter
