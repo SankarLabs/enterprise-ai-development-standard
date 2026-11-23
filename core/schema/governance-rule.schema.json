@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eads.local/schema/governance-rule.schema.json",
+  "title": "EADS governance rules",
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/GovernanceRule" }
+    }
+  },
+  "required": ["rules"],
+  "additionalProperties": false,
+  "$defs": {
+    "Scope": {
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "enum": ["all-agents", "gate", "before-gate", "stage", "agent-adapter"]
+        },
+        "reference": {
+          "type": "string"
+        }
+      },
+      "required": ["dimension"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "dimension": { "const": "all-agents" } },
+            "required": ["dimension"]
+          },
+          "then": {
+            "not": { "required": ["reference"] }
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "properties": { "dimension": { "const": "all-agents" } },
+              "required": ["dimension"]
+            }
+          },
+          "then": {
+            "required": ["reference"]
+          }
+        }
+      ]
+    },
+    "Exception": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^EXC-\\d{3}$"
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorized_by_domain": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["id", "condition", "authorized_by_domain"],
+      "additionalProperties": false
+    },
+    "GovernanceRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^GOV-\\d{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rule_type": {
+          "type": "string",
+          "enum": ["permitted", "prohibited", "obligation", "accountability"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Scope" },
+          "minItems": 1
+        },
+        "required_behavior": {
+          "type": "string"
+        },
+        "prohibited_behavior": {
+          "type": "string"
+        },
+        "human_approval_required": {
+          "type": "boolean"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Exception" }
+        },
+        "enforcement_expectation": {
+          "type": "string"
+        },
+        "references": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "deprecated"]
+        },
+        "superseded_by": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "title", "rule_type", "description", "scope", "status"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "rule_type": { "const": "prohibited" } },
+            "required": ["rule_type"]
+          },
+          "then": {
+            "properties": {
+              "human_approval_required": { "not": { "const": true } }
+            }
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "properties": { "rule_type": { "const": "prohibited" } },
+              "required": ["rule_type"]
+            }
+          },
+          "then": {
+            "not": { "required": ["exceptions"] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "rule_type": { "const": "obligation" } },
+            "required": ["rule_type"]
+          },
+          "then": {
+            "required": ["required_behavior"]
+          }
+        },
+        {
+          "if": {
+            "properties": { "rule_type": { "const": "prohibited" } },
+            "required": ["rule_type"]
+          },
+          "then": {
+            "required": ["prohibited_behavior"]
+          }
+        },
+        {
+          "if": {
+            "properties": { "status": { "const": "deprecated" } },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["superseded_by"]
+          }
+        }
+      ]
+    }
+  }
+}

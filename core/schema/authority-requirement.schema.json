@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eads.local/schema/authority-requirement.schema.json",
+  "title": "EADS authority requirement (nested type)",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": ["domain"],
+  "additionalProperties": false
+}

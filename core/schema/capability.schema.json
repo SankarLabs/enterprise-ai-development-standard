@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eads.local/schema/capability.schema.json",
+  "title": "EADS agent capability requirements",
+  "type": "object",
+  "properties": {
+    "capabilities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Capability" }
+    }
+  },
+  "required": ["capabilities"],
+  "additionalProperties": false,
+  "$defs": {
+    "Capability": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CAP-[A-Z-]+$"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["instruction-rendering", "action-enforcement"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_evidence": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["id", "category", "description", "required_evidence"],
+      "additionalProperties": false
+    }
+  }
+}

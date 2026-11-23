@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eads.local/schema/evidence-requirement.schema.json",
+  "title": "EADS evidence requirement (nested type)",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["gate-chain", "validation-result", "approval-record", "external-reference"]
+    }
+  },
+  "required": ["description", "kind"],
+  "additionalProperties": false
+}

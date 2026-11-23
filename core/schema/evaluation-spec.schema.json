@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eads.local/schema/evaluation-spec.schema.json",
+  "title": "EADS evaluation specifications",
+  "type": "object",
+  "properties": {
+    "evaluation_specs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/EvaluationSpec" }
+    }
+  },
+  "required": ["evaluation_specs"],
+  "additionalProperties": false,
+  "$defs": {
+    "EvaluationSpec": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^EVAL-[A-Z0-9-]+$"
+        },
+        "target_capability": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenario_type": {
+          "type": "string",
+          "enum": ["positive", "negative"]
+        }
+      },
+      "required": ["id", "target_capability", "description", "scenario_type"],
+      "additionalProperties": false
+    }
+  }
+}
